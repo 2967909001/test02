@@ -1,0 +1,1050 @@
+<style>
+.headerB,.zxBc,.zxBd,.footer,.zxBe{min-width:1200px;}
+.zxBcb p {
+	overflow: hidden;
+	padding: 10px 0px;
+	height: 140px;
+}
+.zxBcb ul {
+	overflow: hidden;
+	padding: 20px 0;
+	margin-left: -28px;
+}
+</style>
+<style type="text/css">
+ .bannerB,.bannerB ul,.bannerB li{
+  height: 500px;
+ }
+ 
+ @media only screen and (max-width:1440px ) {
+  .bannerB,.bannerB ul,.bannerB li{
+   height:460px;
+   background-size:auto 100% !important;
+   -webkit-background-size:auto 100% !important;
+  }
+ }
+.navBa{margin-top:0;width:100%;}
+  .navBa.fixed{
+   position: fixed;
+   width: 100%;
+   left: 0;
+   top: 0;
+    transition:all .3s;
+ -webkit-transition:all .3s;
+  }
+ .navBa.fixed{
+ height:55px;
+ }
+ .navBa ul li .tu{
+   background-repeat:no-repeat ;
+    background-position:center center;
+ }
+ .navBa.fixed ul li .tu{
+   display:inline-block;
+   width: 30px;
+   height: 30px;
+   vertical-align: middle;
+   background-size:auto 20px !important;
+   -webkit-background-size:auto  20px !important;
+   margin: 0 5px 0 0;
+   background-repeat:no-repeat ;
+   background-position:center center;
+   background-color:#286ef7 ;
+ }
+ .navBa.fixed ul li{
+   background:none;
+ }
+ .navBa.fixed ul{
+  margin-top: 5px;
+ }
+.y_bg{
+padding-top:118px;
+}
+</style><script>
+ $(window).scroll(function(){
+  
+  var scrollH_=$(this).scrollTop();
+  var oH=$(".bannerB").height();
+  console.log(scrollH_)
+  console.log(oH)
+  if(scrollH_>=oH){
+   $(".navBa").addClass("fixed");
+  }else{
+   $(".navBa").removeClass("fixed");
+  }
+ });
+</script></head>
+
+
+<body class="BGeee">
+	
+<!--头部开始-->
+<style type="text/css">
+/*去除ie8 a标签点击出现虚线框 */
+a:focus{outline:none;}
+.headerB,.zxBc,.zxBd,.footer,.zxBe{min-width:1200px;}
+</style>
+
+<script type="text/javascript">
+
+    var ROOT_PATH="./";
+
+jQuery(function(){
+
+
+  //隐藏面包屑，业务中心模块
+  jQuery(".curBoxb a").each(function(){
+     if(jQuery(this).html()=='财富管理'){
+       jQuery(this).hide()
+
+    }
+  })
+
+   jQuery("#clnlFun a").each(function(){
+     if(jQuery(this).html()=='期货经纪人'||jQuery(this).html()=='业务经办人'){
+       jQuery(this).remove()
+
+    }
+
+   })
+
+
+})
+
+
+
+
+   //$(document).ready(function(){
+jQuery(document).ready(function($) {
+
+       //判断是否登录
+      if(getCookie('logon')=='true'){
+          //修改顶部个人中心那块
+          $('.ButB.a').parent('li').hide();
+          $('.ButB.b').parent('li').hide();     
+          $('.userName').parent('li').show();    
+          $('#logout').parent('li').show(); 
+          $('.channelA.grzx').attr("href","./grzx/");  //设置个人中心可访问
+          //处理手机号，将中间四位设置为*号
+          var tel = getCookie('tel');
+          tel=tel.substring(0,3)+"****"+tel.substring(7,11);
+          $('.userName').html(tel);
+      }
+
+    //控制导航栏选中效果
+    $(".headerBb ul li a.channelA").hover(function(){$(this).attr("class","channelA cur");},function(){$(this).attr("class","channelA");});
+
+    })
+
+    //设置cookie值
+    function setCookie(key,val,time){
+
+        var date=new Date(); //获取当前时间
+        if(time==''||time==undefined||time==null){//time为空
+           var exdate=new Date();
+           exdate.setDate(exdate.getDate()+ 365);
+           document.cookie=key + "=" + val  + "; path=/";  //设置cookie
+        }else{//设置cookie留存时间
+           var expiresDays=time;  //将date设置为n天以后的时间
+           date.setTime(date.getTime()+expiresDays*24*3600*1000); //格式化为cookie识别的时间
+           document.cookie=key + "=" + val +";expires="+date.toGMTString()+";path=/";
+         }
+   }
+   //获取cookie的值
+   function getCookie(key){
+
+        /*获取cookie参数*/
+        var getCookie = document.cookie.replace(/[ ]/g,"");  //获取cookie，并且将获得的cookie格式化，去掉空格字符
+        var arrCookie = getCookie.split(";")  //将获得的cookie以"分号"为标识 将cookie保存到arrCookie的数组中
+        var tips;  //声明变量tips
+        for(var i=0;i<arrCookie.length;i++){   //使用for循环查找cookie中的tips变量
+            var arr=arrCookie[i].split("=");   //将单条cookie用"等号"为标识，将单条cookie保存为arr数组
+            if(key==arr[0]){  //匹配变量名称，其中arr[0]是指的cookie名称，如果该条变量为tips则执行判断语句中的赋值操作
+                tips=arr[1];   //将cookie的值赋给变量tips
+                break;   //终止for循环遍历
+            }
+        }
+       return tips;
+   }
+    //删除cookie的值
+    function delCookie(key){
+     setCookie(key,'',-10);
+    }
+
+       //退出登录
+     function logout(){
+
+        //修改顶部个人中心那块
+        $('.ButB.a').parent('li').show();
+        $('.ButB.b').parent('li').show();     
+        $('.userName').parent('li').hide();    
+        $('#logout').parent('li').hide(); 
+        $('.channelA.grzx').attr("href","./grzx/dl/");  //设置个人中心不可访问
+        delCookie('logon');//清除登录成功标记cookie
+        delCookie('sessionId');//清除sessionId
+        window.location.href="./grzx/dl/";
+    }
+
+
+
+//判断是什么浏览器
+			function isBrowser() {
+				var Sys = {};
+				var ua = navigator.userAgent.toLowerCase();
+				var s;
+				(s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1]:
+					(s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+					(s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+					(s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+					(s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+				if(Sys.ie) { //Js判断为IE浏览器
+                                         var x = Sys.ie
+					if(Sys.ie == '9.0') { //Js判断为IE 9
+						return true;
+					} else if(Sys.ie == '8.0') { //Js判断为IE 8
+						return true;
+					}else if(Sys.ie == '7.0') { //Js判断为IE 8
+						return true;
+					}
+				}
+			}
+
+  </script>
+
+
+<!--头部开始-->
+<div class="headerB">
+	<!--headerBaBG s-->
+	<div class="headerBaBG">
+	<!--headerBa s-->
+	<div class="headerBa">
+		<ul class="frBox Ba">
+                   
+                      
+			<li>客服中心：95548</li>
+                       
+                       
+			<li><a href="http://www.cs.ecitic.com/newsite/zqkh/">证券开户</a></li>
+                        
+			<li>|</li>
+                         
+                       
+			<li><a href="http://www.cs.ecitic.com/newsite/yywd/">营业网点</a></li>
+                        
+			<li>|</li>
+                         
+                       
+			<li><a href="http://www.cs.ecitic.com/?source=new">回到旧版</a></li>
+                        
+                       
+
+                   
+			<!--<li><a href="./grzx/dl/" class="ButB a">登录</a></li> -->
+			<!--<li><a href="./grzx/dl/" class="ButB b" >注册</a></li> -->
+		        <!--<li style='display:none'><div class="userName">孙串出<div class="userName1"></div></div></li> -->
+			 <li  id="logoutbtn"   style='display:none'><a href="#"  id="logout" onclick="logout()">退出</a></li> 
+		</ul>
+		中信证券欢迎您！
+	</div>
+	<!--headerBa e-->		
+	</div>
+	<!--headerBaBG e-->
+	
+	<!--headerBb s-->
+	<div class="headerBb">
+		
+		
+		<!--navB s-->
+		<div class="navB">
+			<ul>
+ 
+<!--    下拉框 开始   -->
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/" class="channelA">首页</a>
+     
+					    
+					</li>
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/##" class="channelA">公司业务</a>
+     
+					   <div class="listB">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+         
+							<tbody><tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/jjyw_14910/201803/W020180306737618887335.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/jjyw/">经纪业务</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/jjyw/ywjs/201808/t20180809_985739.html">业务介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/jjyw/cptx/">产品体系</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite//ywzx/jjyw/khtx/">客户体系</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/jjyw/qhzjjywjs/">期货中间介绍业务</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/tzyx_14911/201803/W020180307709444546550.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/tzyh/">投资银行</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/tzyh/ywjs/">业务介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/tzyh/gqtz/">股权融资</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/tzyh/zqrz/">债权融资</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/tzyh/bgcz/201711/t20171129_94224.html">并购重组</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/zcgl_14912/201803/W020180307710275098103.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/zcgl/">资产管理</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/zcgl/ywjs/">业务介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/zcgl/scsy/">市场荣誉</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/zcgl/ywbj/">业务布局</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/zcgl/qynj/">养老金业务</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/gdsy_14913/201803/W020180307710652455507.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/gdsy/">固定收益</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/gdsy/ywjs/201808/t20180817_988515.html">业务介绍</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/zqjr_14914/201803/W020180307710921790055.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/zqjr/">证券金融</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/zqjr/rzrq/">融资融券</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/zqjr/jygj/">交易工具</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/zqjr/jypt/">交易平台</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/lltz_14915/201803/W020180307711144365381.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/lltz/">另类投资</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/lltz/ywjs/">业务介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/lltz/cpjs/">产品介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/lltz/bmjs/">部门介绍</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/gqysp_14916/201803/W020180307711409541232.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/gqysp/">股权衍生品</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/gqysp/ywjs/">业务介绍</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/dzsp_14917/201803/W020180307711714131569.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/dzsp/">大宗商品</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/dzsp/ywjs/">业务介绍</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/gpxsyw_14918/201803/W020180307711958213560.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/gpxs/">股票销售业务</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/gpxs/ywjs/">业务介绍</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/yjcp_14919/201803/W020180307712209312604.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/yjcp/">研究产品</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/yjcp/clyjjjrgc/">策略研究及金融工程</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/yjcp/hyyjbg/">行业研究报告</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/yjcp/bmjs/">部门介绍</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/tgyw_14920/201803/W020180307712491053231.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/tgyw/">托管业务</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/tgyw/ywjs/">业务介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/tgyw/xxpl/">信息披露</a>
+     <font>|</font>
+  
+                                         <a href="https://iservice.citics.com/">管理人服务平台</a>
+     <font>|</font>
+  
+                                         <a href="https://iservice.citics.com/myfund">投资者服务平台</a>
+     <font>|</font>
+  
+                                         <a href="http://fundservices.citics.com/lxwm/lxwm/">联系我们</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/ywzx_14909/kfzx_14921/201803/W020180307712767044899.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/ywzx/callcenter/">客服中心</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/callcenter/ywjs/201710/t20171027_69587.html">业务介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/callcenter/tdfc/201710/t20171027_74110.html">团队风采</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/ywzx/callcenter/dhwtlc/201710/t20171027_87426.html">电话委托流程</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+						</tbody></table>
+                                           </div> 
+					</li>
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/##" class="channelA">财富管理</a>
+     
+					   <div class="listB">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+         
+							<tbody><tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/cpzx_14922/zxzqxsjrcpxxgs_14923/201803/W020180307714160235904.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/cpzx/jrcpxxgs/">中信证券销售金融产品信息公示</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/cpzx/jrcpxxgs/dxjrcp/">中信证券代销金融产品</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/cpzx/jrcpxxgs/zgcp/">中信证券资管产品</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/cpzx_14922/xjlc_14924/201803/W020180307714433260180.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/cpzx/xjlc/">现金理财</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/cpzx/xjlc/ttlc/">天天利财</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/cpzx/xjlc/xjb/">信金保</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/cpzx_14922/zxgz_14925/201803/W020180307714775178877.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/cpzx/zxgz/">中信估值</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/cpzx_14922/zgcp_14926/201803/W020180307715326633968.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/cpzx/cplb/zgcp/index.html">资管产品</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/cpzx/cplb/zgcp/index.html?productType=pro_limit_no">大集合非限定性产品</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/cpzx/cplb/zgcp/index.html?productType=pro_limit_yes">大集合限定性产品+信盈分级</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/cpzx/cplb/zgcp/index.html?productType=pro_limit_min">集合资产管理计划</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+						</tbody></table>
+                                           </div> 
+					</li>
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/rjxz/" class="channelA">软件下载</a>
+     
+					   <div class="listB">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+         
+							<tbody><tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/rjxz_14927/dnkhd_14928/201803/W020180307716108020453.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/rjxz/dnkhd/">电脑客户端</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/rjxz/dnkhd/zxzqzxqnbwsjyxt/">中信证券至信全能版网上交易系统</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/rjxz/dnkhd/zxzqzsqnbwsjyxt/">中信证券至胜全能版网上交易系统</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/rjxz_14927/sjkhd_14929/201803/W020180307716519352655.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/rjxz/sjkhd/">手机客户端</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/rjxz_14927/zxjy_14930/201803/W020180307716789087608.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/rjxz/zxjy/">在线交易</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/rjxz_14927/hdqqjy_14931/201803/W020180307716924080363.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/rjxz/hdqqjy/">期权手机版</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+						</tbody></table>
+                                           </div> 
+					</li>
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/tzzgx/" class="channelA">投资者关系</a>
+     
+					   <div class="listB">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+         
+							<tbody><tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/gsgk_14933/201803/W020180307726776367559.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/gsgk/">公司概况</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/gsgk/gsjs/">公司介绍</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/gsgk/gszd/">公司制度</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/gsgk/dsjsjgg/">董事监事及高管</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/gsgk/zzjg/201707/t20170720_38540.html">组织架构</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/gpjfh_14934/201803/W020180307727031563553.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/gpjfh/">股票及分红</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/gpjfh/gqjg/">股权结构</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/gpjfh/fhqk/">分红情况</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/gpjfh/stockPriceInfo_A/">股价信息(A股)</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/cwbgyzy_14935/201803/W020180307727292434170.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/cwbgyzy/">财务报告与摘要</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/cwbgyzy/cwbg/">财务报告</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/cwbgyzy/cwzy/">财务摘要</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/tzzhd_14936/201803/W020180307727606361107.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/tzzhd/">投资者活动</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/tzzhd/tzzrz/">投资者日志</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/ggyth_14937/201803/W020180307727854862368.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/ggyth/">公告与通函</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/ggyth/gg/">公告</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/yjfb_14938/201803/W020180307728101168925.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/yjfb/">业绩发布</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/yjfb/yjfbh/">业绩发布会</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/tzzfw_14939/201803/W020180307728311525963.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/tzzfw/">投资者服务</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzgx/tzzfw/cjwt_203/">常见问题</a>
+     <font>|</font>
+  
+                                         <a href="http://edu.sse.com.cn/">投资者保护宣传</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzgx_14932/lxwm_14940/201803/W020180307728632414761.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzgx/lxwm/">联系我们</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+						</tbody></table>
+                                           </div> 
+					</li>
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/tzzjy/" class="channelA">投资者教育</a>
+     
+					   <div class="listB">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+         
+							<tbody><tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzjy_14941/zcfg_14942/201803/W020180307724980036750.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzjy/zxfg/">政策法规</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzjy/zxfg/flfg/">法律法规</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzjy/zxfg/jysgz/">交易所规则</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzjy/zxfg/tzzjygd/">投资者教育规定</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzjy_14941/fxjs/201803/W020180307725232280072.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzjy/fxjs/">风险揭示</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzjy_14941/zxhd_14944/201803/W020180307725447766482.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzjy/zxhd/">专项活动</a></div>
+
+									<div class="liDiv">
+    
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzjy/zxhd/tzzsdxgl/">投资者适当性管理</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzjy/zxhd/fxq/">反洗钱</a>
+     <font>|</font>
+  
+                                         <a href="http://www.cs.ecitic.com/newsite/tzzjy/zxhd/djffzqhd/">打击非法证券活动</a>
+     
+  
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzjy_14941/zt/201803/W020180307725798798786.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzjy/zt/">专题</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/tzzjy_14941/jglj/201803/W020180307726042920874.png) no-repeat left center;"><a href="http://www.cs.ecitic.com/newsite/tzzjy/jglj/">监管链接</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+                                                          
+							</tr>
+
+      
+						</tbody></table>
+                                           </div> 
+					</li>
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/##" class="channelA">人才招聘</a>
+     
+					   <div class="listB">
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+         
+							<tbody><tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/rczp_14947/joinus/201803/W020180307720127766808.png) no-repeat left center;"><a href="http://customer.citics.com/login/JoinUsExperice.jsp">JOIN US</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+                                                          
+								<td valign="top" class="n">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/rczp_14947/2018xyzp/201803/W020180307719845124972.png) no-repeat left center;"><a href="http://customer.citics.com/login/JoinUsSchool.jsp">校园招聘</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+							</tr>
+
+      
+							<tr>
+
+                                                          
+								<td valign="top" width="50%">
+
+									<div class="h2Div bg7" style="background:url(http://www.cs.ecitic.com/newsite/ggmk/wztb/ljcd/rczp_14947/sxszp/201807/W020180725563282210860.png) no-repeat left center;"><a href="http://customer.citics.com/login/JoinUsSchool_sx.jsp">日常实习生</a></div>
+
+									<div class="liDiv">
+    
+
+									</div>
+								</td>
+                                                          
+                                                          
+							</tr>
+
+      
+						</tbody></table>
+                                           </div> 
+					</li>
+
+					<li>
+                            
+                                          <a href="http://www.cs.ecitic.com/newsite/en/" class="channelA">English</a>
+     
+					    
+					</li>
+
+
+<!--   下拉框 结束   -->
+
+
+				<!--<li><a href="##" class="channelA grzx">个人中心</a></li>-->
+
+			</ul>
+		</div>
+		<!--navB e-->
+		<a href="http://www.cs.ecitic.com/newsite/">
+
+    <img src="http://www.cs.ecitic.com/newsite/ggmk/wztb/wzlogo/201803/W020180711560116478457.png" alt="" class="logoB" />
+
+</a>
+	</div>
+	<!--headerBb e-->
+</div>
+
+<script>
+    //如果下拉菜单没有子分类，隐藏下拉模块
+    jQuery(".navB li").each(function(){
+     if(jQuery(this).find('.listB table tr').size()==0){
+       jQuery(this).find(".listB").remove();
+
+    }
+  })
+</script>
+
+<!--头部结束-->
